@@ -243,7 +243,7 @@ def cli(arch, dataset, max_nodes, min_nodes, ksize, config_file, hparams, output
         print(in_size, out_size)
         trainer = STrainer(model, loss_fn=loss, metrics=METRICS,
                            gpu=True, model_dir=model_dir, op__lr=5e-4)
-        trainer.fit(train_dt, valid_dt, batch_size=64, epochs=100, generator_fn=generator, checkpoint='model_{}.pth.tar'.format(arch), tboardX="logs",
+        trainer.fit(train_dt, valid_dt, batch_size=64, epochs=3, generator_fn=generator, checkpoint='model_{}.pth.tar'.format(arch), tboardX="logs",
                     checkpoint__restore_best=True, reduce_lr={"verbose": True, "factor": 0.5, "cooldown": 3}, early_stopping={"patience": 20, "min_delta": 1e-3})
         print("Evaluation step")
         loss, metric, pred = trainer.evaluate(
