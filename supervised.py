@@ -13,6 +13,12 @@ from functools import partial
 from poutyne import torch_to_numpy, numpy_to_torch
 from sklearn import metrics as skmetrics
 
+import sys, os
+#sys.path.insert(0, os.path.abspath('lapool/gnnpooling'))
+from pathlib import Path
+sys.path.append(os.path.join(Path(__file__).parent))
+sys.path.append(os.path.join(Path(__file__).parent, 'gnnpooling'))
+print('os.path.join(Path(__file__)', (os.path.join(Path(__file__).parent, 'gnnpooling')))
 from gnnpooling.models.layers import FCLayer, get_activation
 from gnnpooling.pooler.batchlapool import LaPool
 from gnnpooling.pooler.diffpool import DiffPool
@@ -163,7 +169,7 @@ def loss_fn(pred, targets, weights=None, base_criterion=None):
 
 
 def get_dataset(dataset, min_size=0, max_size=None, **kwargs):
-    if dataset == 'tox21':
+    if dataset == 'tox21_lapool':
         return get_tox21(min_size=min_size, max_size=max_size, **kwargs)
 
     elif dataset == 'fragments':
@@ -197,7 +203,7 @@ def save_model(model, output):
 
 @click.command()
 @click.option('--arch', '-a', default='gnn', help="Type of model")
-@click.option('--dataset', '-d', default='tox21', help="Supervised dataset")
+@click.option('--dataset', '-d', default='tox21_lapool', help="Supervised dataset")
 @click.option('--max_nodes', default=50, type=int, help="Maximum number of nodes")
 @click.option('--min_nodes', default=5, type=int, help="Minimum number of nodes")
 @click.option('--ksize', '-k', default=0.125, type=float, help="Percentage of nodes to retains during hierarchical pooling")

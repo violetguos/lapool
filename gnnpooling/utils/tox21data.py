@@ -15,9 +15,9 @@ from gnnpooling.utils.tensor_utils import to_tensor
 logging.getLogger("deepchem").setLevel(logging.WARNING)
 
 
-data_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../data")
+data_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../../../data")
 
-def load_tox21(split='stratified', dataset_file=os.path.join(data_dir, "tox21/tox21.csv.gz"), **kwargs):
+def load_tox21(split='stratified', dataset_file=os.path.join(data_dir, "tox21_lapool/tox21.csv.gz"), **kwargs):
     """Load Tox21 datasets. Does not do train/test split"""
     # Featurize Tox21 dataset
 
